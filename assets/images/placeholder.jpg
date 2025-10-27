@@ -1,0 +1,28 @@
+<?php
+// Create a simple placeholder image
+$width = 400;
+$height = 300;
+
+$img = imagecreate($width, $height);
+$bg = imagecolorallocate($img, 240, 240, 240);
+$text_color = imagecolorallocate($img, 100, 100, 100);
+$border_color = imagecolorallocate($img, 200, 200, 200);
+
+// Add border
+imagerectangle($img, 0, 0, $width-1, $height-1, $border_color);
+
+// Add text
+$text = 'Product Image';
+$font_size = 5;
+$text_width = imagefontwidth($font_size) * strlen($text);
+$text_height = imagefontheight($font_size);
+$x = ($width - $text_width) / 2;
+$y = ($height - $text_height) / 2;
+
+imagestring($img, $font_size, $x, $y, $text, $text_color);
+
+// Output image
+header('Content-Type: image/jpeg');
+imagejpeg($img);
+imagedestroy($img);
+?>
